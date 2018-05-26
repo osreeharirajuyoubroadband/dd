@@ -27,6 +27,7 @@ func main() {
 	http.Handle("/clientScripts/", http.StripPrefix("/clientScripts/", http.FileServer(http.Dir("clientScripts"))))
 	http.Handle("/photos/", http.StripPrefix("/photos/", http.FileServer(http.Dir("photos"))))
 	http.Handle("/photos/bareb/", http.StripPrefix("/photos/bareb/", http.FileServer(http.Dir("photos/bareb"))))
+	http.Handle("/photos/beauty/", http.StripPrefix("/photos/beauty/", http.FileServer(http.Dir("photos/beauty"))))
 	//fmt.Println("before handleHtmls...")
 	handleHtmls()
 	//fmt.Println("after handleHtmls...")

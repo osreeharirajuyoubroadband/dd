@@ -1,24 +1,28 @@
 .imgsLyot {
   width: 100%;
   height: auto;
-  background-color: lightblue; 
+  background-color: lightblue;
   padding: 0% 0% 0% 0%;
   margin: auto;
   text-align: center;
   float: left;
-  align-self: center; 
+  align-self: center;
 }
 .imgsLyotNewLine {
-	clear: both; 
-	float: left; 
-	display: block; 
-	position: relative; 
+	clear: both;
+	float: left;
+	display: block;
+	position: relative;
 }
 
-img {
+img{
 	width: 240px;
 	height: 300px;
 	border-radius: 5px;
+}
+img:hover{
+  opacity: .8;
+  border-radius: 10px;
 }
 
 .clearImgLyot {
