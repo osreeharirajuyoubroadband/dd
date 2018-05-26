@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	//"io"
-	//"os"
+	// "os"
+	"bufio"
+	"strings"
 )
 
 type params struct {
@@ -18,8 +20,9 @@ func handleHtmls() {
 	//fmt.Println("Before /home..")
 	http.HandleFunc("/home", homeHndl)
 	//fmt.Println("After /home..")
-	http.HandleFunc("/nude",nudeHndl)
+	http.HandleFunc("/nude",nudeDirtHndl)
 	http.HandleFunc("/beauty",beautyHndl)
+	http.HandleFunc("/nudedirt",nudeDirtHndl)
 }
 
 func homeHndl(w http.ResponseWriter, r *http.Request) {
@@ -28,30 +31,40 @@ func homeHndl(w http.ResponseWriter, r *http.Request) {
 	htmlTpl.ExecuteTemplate(w, "home.html", pars)
 }
 
-func nudeHndl(w http.ResponseWriter, r *http.Request) {
-	var Imgs []string
-	nudeFiles, err := ioutil.ReadDir("./photos/bareb")
-	if err != nil {
-		fmt.Printf("Error while reading images from directory")
-	}
-
-	for _,f:= range nudeFiles {
-		Imgs=append(Imgs,f.Name())
-	}
-	pars := params{"Nude - ImageWeb", "Nude girls", Imgs}
-	htmlTpl.ExecuteTemplate(w, "nudeImgs.html", pars)
-}
-
 func beautyHndl(w http.ResponseWriter, r *http.Request) {
 	var Imgs []string
-	nudeFiles, err := ioutil.ReadDir("./photos/beauty")
+	nudeFiles, err := ioutil.ReadFile("beautyUrls.txt")
 	if err != nil {
-		fmt.Printf("Error while reading images from directory")
+		fmt.Printf("Error while reading file beautyUrls.txt")
 	}
-
-	for _,f:= range nudeFiles {
-		Imgs=append(Imgs,f.Name())
+	nudeStr:=string(nudeFiles)
+	sr := strings.NewReader(nudeStr)
+	br := bufio.NewReader(sr)
+	line, isPrefix, err := br.ReadLine()
+	fmt.Println(isPrefix)
+	for err == nil {
+			Imgs=append(Imgs,string(line))
+			line, isPrefix, err = br.ReadLine()
 	}
-	pars := params{"Beauty - ImageWeb", "Beautiful girls", Imgs}
+	pars := params{"Beauty - ImageWeb", "Beauty girls", Imgs}
 	htmlTpl.ExecuteTemplate(w, "beautyImgs.html", pars)
+}
+//*******************************************************************
+func nudeDirtHndl(w http.ResponseWriter, r *http.Request) {
+	var Imgs []string
+	nudeFiles, err := ioutil.ReadFile("imgsUrls.txt")
+	if err != nil {
+		fmt.Printf("Error while reading file imgsUrls.txt")
+	}
+	nudeStr:=string(nudeFiles)
+	sr := strings.NewReader(nudeStr)
+	br := bufio.NewReader(sr)
+	line, isPrefix, err := br.ReadLine()
+	fmt.Println(isPrefix)
+	for err == nil {
+			Imgs=append(Imgs,string(line))
+			line, isPrefix, err = br.ReadLine()
+	}
+	pars := params{"Nude1 - ImageWeb", "Nude girls", Imgs}
+	htmlTpl.ExecuteTemplate(w, "nudeImgsDirt.html", pars)
 }
