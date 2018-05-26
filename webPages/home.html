@@ -1,3 +1,5 @@
 {{template "headerAll" .}}
-{{template "imagesLayout" .}}
+{{range $img, $e := .ImgS}}
+<a href="photos/bareb/{{index $.ImgS $img}}" target="_blank"><img src="photos/bareb/{{index $.ImgS $img}}" alt="notFound"></a>
+{{end}}
 {{template "footerAll" .}}

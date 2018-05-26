@@ -2,13 +2,16 @@ package main
 
 import (
 	"net/http"
-	//"fmt"
+	"fmt"
+	"io/ioutil"
+	//"io"
+	//"os"
 )
 
 type params struct {
 	Title  string
 	Header string
-	imgS   []string
+	ImgS   []string
 }
 
 func handleHtmls() {
@@ -18,8 +21,19 @@ func handleHtmls() {
 }
 
 func homeHndl(w http.ResponseWriter, r *http.Request) {
-	imgs := []string{"photos/home.png"}
-	pars := params{"Home - ImageWeb", "Home", imgs}
+	Imgs := []string{"photos/error.png"}
+	// Read images from directory
+	nudeFiles, err := ioutil.ReadDir("./photos/bareb")
+	if err != nil {
+		fmt.Printf("Error while reading images from directory")
+	}
+
+	for _,f:= range nudeFiles {
+		fmt.Println(f.Name())
+		Imgs=append(Imgs,f.Name())
+	}
+	//End: Read	
+	pars := params{"Home - ImageWeb", "Home", Imgs}
 	//fmt.Println(pars.Title)
 	//fmt.Println(pars.Header)
 	//fmt.Println(pars.imgS[0])

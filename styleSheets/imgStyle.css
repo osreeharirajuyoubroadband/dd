@@ -1,32 +1,26 @@
 .imgsLyot {
   width: 100%;
-  /* background-color: lightblue; */
+  height: auto;
+  background-color: lightblue; 
+  padding: 0% 0% 0% 0%;
   margin: auto;
+  text-align: center;
+  float: left;
+  align-self: center; 
 }
+.imgsLyotNewLine {
+	clear: both; 
+	float: left; 
+	display: block; 
+	position: relative; 
+}
+
 img {
-  width: 240px;
-  height: 300px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-img:hover {
-	border-color: lightgreen;
-	border: 2px solid lightgreen;
-}
-table {
-  /* background-color: blue; */
-  left: 20%;
-  padding: 0px 0px 0px 0px;
-  margin: 0 auto;
-  border: none;
+	width: 240px;
+	height: 300px;
+	border-radius: 5px;
 }
 
-td {
-  padding: 0px 0px 0px 0px;
-  margin: 0 auto;
-}
-
-tr {
-  padding: 0px 0px 0px 0px;
-  margin: 0 auto;
+.clearImgLyot {
+	clear: both;
 }
