@@ -4,8 +4,9 @@ import (
 	//"fmt"
 	"html/template"
 	"net/http"
+	"log"
 
-	"google.golang.org/appengine"
+	//"google.golang.org/appengine"
 )
 
 var htmlTpl *template.Template
@@ -31,7 +32,8 @@ func main() {
 	//fmt.Println("before handleHtmls...")
 	handleHtmls()
 	//fmt.Println("after handleHtmls...")
-	appengine.Main()
+	//appengine.Main()
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
 
 func idxHndlr(w http.ResponseWriter, r *http.Request) {
